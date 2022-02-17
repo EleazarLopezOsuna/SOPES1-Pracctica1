@@ -1,0 +1,24 @@
+.operation-table{
+  width: 100%;
+  table-layout: fixed;
+}
+
+.operation-scrollable{
+  overflow-y: auto;
+  height: 400px;
+  margin: 1.5rem;
+}
+
+.operation-scrollable::-webkit-scrollbar {
+  display: none;
+}
+
+.operation-table-head{
+  background-color: #444;
+  color: white;
+  margin-bottom: 1.5rem;
+  border-radius: 5px;
+  height: 4rem;
+  position: sticky;
+  top: 0;
+}

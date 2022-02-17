@@ -8,11 +8,11 @@ import (
 
 func TestCreate(t *testing.T) {
 	operation := m.Operation{
-		Left:     5,
-		Right:    35,
-		Operator: "+",
-		Result:   40,
-		CreateAt: time.Now(),
+		Left:      5,
+		Right:     35,
+		Operator:  "+",
+		Result:    40,
+		CreatedAt: time.Now(),
 	}
 	err := Create(operation)
 	if err != nil {

@@ -6,12 +6,12 @@ import (
 )
 
 type Operation struct {
-	ID       primitive.ObjectID `bson:"_id,omitempty" json:"id,omitempty"`
-	Left     int                `json:"left"`
-	Right    int                `json:"right"`
-	Operator string             `json:"operator"`
-	Result   int                `json:"result"`
-	CreateAt time.Time          `json:"create_at"`
+	ID        primitive.ObjectID `bson:"_id,omitempty" json:"id,omitempty"`
+	Left      int                `json:"left"`
+	Right     int                `json:"right"`
+	Operator  string             `json:"operator"`
+	Result    int                `json:"result"`
+	CreatedAt time.Time          `json:"create_at"`
 }
 
 type Operations []Operation
