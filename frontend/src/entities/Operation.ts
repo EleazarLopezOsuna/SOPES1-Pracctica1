@@ -1,4 +1,5 @@
 export type Operation = {
+    Id: string;
     Left: number;
     Operator: string;
     Right: number;

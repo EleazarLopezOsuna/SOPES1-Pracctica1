@@ -15,8 +15,11 @@ func main() {
 	methods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE"})
 	origins := handlers.AllowedOrigins([]string{"*"})
 	router.HandleFunc("/operation", CreateOperationEndpoint).Methods("POST")
-	router.HandleFunc("/", home)
-	http.ListenAndServe(":12345", handlers.CORS(headers, methods, origins)(router))
+	router.HandleFunc("/operations", GetOperationsEndpoint).Methods("GET")
+	err := http.ListenAndServe(":12345", handlers.CORS(headers, methods, origins)(router))
+	if err != nil {
+		return
+	}
 }
 
 func CreateOperationEndpoint(response http.ResponseWriter, request *http.Request) {
@@ -24,11 +27,24 @@ func CreateOperationEndpoint(response http.ResponseWriter, request *http.Request
 	response.Header().Set("Access-Control-Allow-Origin", "http://localhost:12345/operation")
 	response.Header().Add("content-type", "application/json")
 	var operation m.Operation
-	json.NewDecoder(request.Body).Decode(&operation)
+	err := json.NewDecoder(request.Body).Decode(&operation)
+	if err != nil {
+		return
+	}
 	result := operationRepository.Create(operation)
-	json.NewEncoder(response).Encode(result)
+	err = json.NewEncoder(response).Encode(result)
+	if err != nil {
+		return
+	}
 }
 
-func home(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Hello"))
+func GetOperationsEndpoint(response http.ResponseWriter, request *http.Request) {
+	response.Header().Add("content-type", "application/json")
+	operations, err := operationRepository.Read()
+	if err != nil {
+		response.WriteHeader(http.StatusInternalServerError)
+		response.Write([]byte(`{"message": ""` + err.Error() + `}`))
+		return
+	}
+	json.NewEncoder(response).Encode(operations)
 }

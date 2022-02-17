@@ -5,6 +5,7 @@ import (
 	m "Backend/models"
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo/options"
 	"time"
 )
 
@@ -41,8 +42,10 @@ func Read() (m.Operations, error) {
 	var operations m.Operations
 
 	filter := bson.D{}
+	findOptions := options.Find()
+	findOptions.SetSort(bson.D{{"createdat", -1}})
 
-	cur, err := collection.Find(ctx, filter)
+	cur, err := collection.Find(nil, filter, findOptions)
 
 	if err != nil {
 		return nil, err

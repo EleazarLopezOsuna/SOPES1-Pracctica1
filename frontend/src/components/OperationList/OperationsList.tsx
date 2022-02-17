@@ -1,13 +1,10 @@
-import {Operation} from "../../entities/Operation";
 import React from "react";
 import {OperationItem} from "../OperationItem/OperationItem";
 import "./OperationList.scss"
 
-type Props = {
-    operations: Operation[]
-}
+// @ts-ignore
+export const OperationsList = ({operations}) => {
 
-export const OperationsList: React.FC<Props> = ({operations}) => {
     return (
         <div className="operation-scrollable">
             <table className="operation-table">
@@ -22,13 +19,20 @@ export const OperationsList: React.FC<Props> = ({operations}) => {
                 </thead>
                 <tbody>
                 {
-                    operations.map((operation, i) => (
+                    operations.map((operation: {
+                        id: string;
+                        left: number;
+                        right: number;
+                        operator: string;
+                        result: number;
+                        created_at: string; }) => (
                         <OperationItem
-                            Left={operation.Left}
-                            Right={operation.Right}
-                            Operator={operation.Operator}
-                            Result={operation.Result}
-                            CreatedAt={operation.CreatedAt}
+                            Id={operation.id}
+                            Left={operation.left}
+                            Right={operation.right}
+                            Operator={operation.operator}
+                            Result={operation.result}
+                            CreatedAt={operation.created_at}
                         />
                     ))
                 }

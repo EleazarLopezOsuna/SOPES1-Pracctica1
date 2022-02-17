@@ -11,7 +11,7 @@ type Operation struct {
 	Right     int                `json:"right"`
 	Operator  string             `json:"operator"`
 	Result    int                `json:"result"`
-	CreatedAt time.Time          `json:"create_at"`
+	CreatedAt time.Time          `json:"created_at"`
 }
 
 type Operations []Operation

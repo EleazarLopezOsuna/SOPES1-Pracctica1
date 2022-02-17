@@ -24,7 +24,9 @@ func GetCollection(collection string) *mongo.Collection {
 		panic(err.Error())
 	}
 
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
 	err = client.Connect(ctx)
 
 	if err != nil {

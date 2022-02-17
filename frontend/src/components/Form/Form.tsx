@@ -1,11 +1,13 @@
 import "./Form.scss"
 import React, {useState} from "react";
+import Axios from "axios"
 
-export const Form = () => {
+// @ts-ignore
+export const Form = ({setOperations}) => {
 
     const [Left, setLeft] = useState("")
     const [Right, setRight] = useState("")
-    const [Operator, setOperator] = useState("")
+    const [Operator, setOperator] = useState("+")
 
     const handleSubmit = (e: React.ChangeEvent<any>) => {
         e.preventDefault()
@@ -31,6 +33,12 @@ export const Form = () => {
         setLeft(() => "")
         setRight(() => "")
         setOperator(() => "+")
+
+        setOperations([])
+        Axios.get("http://localhost:12345/operations").then(
+            (response) => {
+                setOperations(response.data)
+            })
     }
 
     return (
