@@ -17,6 +17,17 @@ func Create(operation m.Operation) error {
 	var err error
 
 	operation.CreatedAt = time.Now()
+
+	if operation.Operator == "+" {
+		operation.Result = operation.Left + operation.Right
+	} else if operation.Operator == "-" {
+		operation.Result = operation.Left - operation.Right
+	} else if operation.Operator == "*" {
+		operation.Result = operation.Left * operation.Right
+	} else if operation.Operator == "/" {
+		operation.Result = operation.Left / operation.Right
+	}
+
 	_, err = collection.InsertOne(ctx, operation)
 
 	if err != nil {
