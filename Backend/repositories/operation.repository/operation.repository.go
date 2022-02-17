@@ -5,6 +5,7 @@ import (
 	m "Backend/models"
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
+	"time"
 )
 
 var (
@@ -15,6 +16,7 @@ var (
 func Create(operation m.Operation) error {
 	var err error
 
+	operation.CreatedAt = time.Now()
 	_, err = collection.InsertOne(ctx, operation)
 
 	if err != nil {
