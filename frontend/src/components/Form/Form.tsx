@@ -23,7 +23,7 @@ export const Form = ({setOperations}) => {
             "CreatedAt": (new Date()).toISOString()
         };
 
-        fetch("http://localhost:12345/operation", {
+        fetch("http://34.67.195.168:12345/operation", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(operation)
@@ -35,7 +35,7 @@ export const Form = ({setOperations}) => {
         setOperator(() => "+")
 
         setOperations([])
-        Axios.get("http://localhost:12345/operations").then(
+        Axios.get("http://34.67.195.168:12345/operations").then(
             (response) => {
                 setOperations(response.data)
             })

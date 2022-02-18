@@ -11,7 +11,7 @@ import (
 var (
 	usr      = "sistemasOperativos1"
 	pwd      = "1234"
-	host     = "localhost"
+	host     = "34.67.195.168"
 	port     = 27017
 	database = "operations"
 )
