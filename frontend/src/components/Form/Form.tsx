@@ -38,6 +38,7 @@ export const Form = ({setOperations}) => {
         Axios.get("http://34.67.195.168:12345/operations").then(
             (response) => {
                 setOperations(response.data)
+                window.location.reload();
             })
     }
 
