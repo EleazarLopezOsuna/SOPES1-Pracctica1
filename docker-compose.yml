@@ -1,0 +1,42 @@
+version: "3.9"
+services:
+  database_p1:
+    image: mongo
+    container_name: mongodb_p1
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: sistemasOperativos1
+      MONGO_INITDB_ROOT_PASSWORD: 1234
+    ports:
+      - "27017:27017"
+    restart: always
+    volumes:
+      - '/home/eleazarjlopezo/volume:/data/db'
+    networks:
+      - practica1-net
+
+  backend_p1:
+    image: jaredosuna/backend_p1_201700893
+    container_name: backend_p1
+    ports:
+      - "12345:12345"
+    restart: always
+    depends_on:
+      - database_p1
+    networks:
+      - practica1-net
+
+  frontend_p1:
+    image: jaredosuna/frontend_p1_201700893
+    container_name: frontend_p1
+    ports:
+      - "80:80"
+    restart: always
+    depends_on:
+      - backend_p1
+    networks:
+      - practica1-net
+
+networks:
+  practica1-net:
+    name: "practica1-net"
+    
